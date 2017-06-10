@@ -4,12 +4,13 @@ web:
   ports: 
     - "7070:80"
   volumes:
-    - ./code:/code
+    - .:/server/http
     - ./site.conf:/etc/nginx/conf.d/site.conf
   links:
     - php  
 php:
   container_name: php
+  # image: php-fpm2
   image: php-fpm7.1
   volumes:
-    - ./code:/code
+    - .:/server/http
