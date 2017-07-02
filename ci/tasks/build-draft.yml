@@ -1,0 +1,18 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    - repository: quay.io/hellofresh/docker-php-ci
+    - tag: "7.1"
+
+run:
+  path: built-project-php/ci/tasks/build-draft.sh
+
+inputs:
+  - name: built-project-php
+  - name: app-pr
+
+outputs:
+  - name: artifacts
