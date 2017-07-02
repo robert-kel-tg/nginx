@@ -5,7 +5,7 @@ image_resource:
   type: docker-image
   source:
     - repository: hub.docker.com/r/geertw/docker-php-ci
-    - tag: "7.1"
+#    - tag: "7.1"
 
 run:
   path: built-project-php/ci/tasks/build-draft.sh
