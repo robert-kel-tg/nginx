@@ -1,0 +1,19 @@
+#/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use MyApp\Application\Command\SendTestEmailCommand;
+use Jlinn\Mandrill\Mandrill;
+
+$app = new Application('Test app console');
+$app->setCatchExceptions(true);
+
+
+//print_r(getenv('MANDRILL_APIKEY')); exit;
+$mandrill = new Mandrill('cZlKzaHNJC-oEeLsz0-BFw');
+
+$app->add(new SendTestEmailCommand($mandrill));
+
+$app->run();
