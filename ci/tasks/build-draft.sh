@@ -4,9 +4,6 @@
 echo "Creating build-project directory"
 mkdir build-project
 
-echo "Coping project to build-project"
-cp -r built-project-js/* build-project/
-
 echo "Coping vendor from php"
 cp -r built-project-php/vendor build-project/vendor
 
@@ -26,4 +23,4 @@ rm -rf build-project/node_modules
 find . -name '.[^.]*' -prune -exec rm -rf {} +
 
 echo "* Creating tar.gz"
-tar -czf artifacts/ordering.tar.gz -C build-project .
+tar -czf artifacts/demo.tar.gz -C build-project .
