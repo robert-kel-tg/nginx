@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 echo "Creating build-project directory"
 mkdir build-project
 
