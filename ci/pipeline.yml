@@ -42,7 +42,7 @@ jobs:
 
   - aggregate:
     - task: build php
-      file: app-pr/ci/tasks/pull-request/build-php.yml
+      file: app-pr/ci/tasks/build-php.yml
       params:
         PROJECT_SRC: app-pr
 
