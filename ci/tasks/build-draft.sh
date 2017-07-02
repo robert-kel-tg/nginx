@@ -17,8 +17,6 @@ cd ..
 set -e
 
 echo "Removing unecessary files"
-rm build-project/composer.lock
-rm -rf build-project/node_modules
 find . -name '.[^.]*' -prune -exec rm -rf {} +
 
 echo "* Creating tar.gz"
