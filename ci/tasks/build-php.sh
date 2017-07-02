@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Install dependencies
+#Install dependencies
 composer install --prefer-dist --no-dev --no-interaction --no-progress --no-scripts
 composer dumpautoload -o
 
