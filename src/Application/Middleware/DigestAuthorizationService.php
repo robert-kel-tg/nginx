@@ -27,8 +27,6 @@ final class DigestAuthorizationService implements AuthorizationServiceInterface
                 ['HS512']     // Algorithm used to sign the token, see https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40#section-3
             );
 
-//            echo '<pre>'; print_r($data); exit; echo '</pre>';
-
         } catch (\Exception $e) {
             return false;
         }
