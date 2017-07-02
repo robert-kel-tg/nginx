@@ -1,0 +1,62 @@
+---
+
+resource_types    :
+  - name          : pull-request
+    type          : docker-image
+    source        :
+      repository  : jtarchie/pr
+
+resources:
+- name: semantic-draft-version
+  type: semver
+  source:
+    driver: git
+    uri: {{uri}}
+    branch: version
+    file: version_draft
+    pre: "draft"
+    initial_version: 0.0.1-draft.0
+    
+- name          : app-pr
+  type          : pull-request
+  source        :
+    uri         : {{uri}}
+    access_token: {{oauth_token}}
+    repo        : robertke/nginx
+
+- name          : gh-release-draft
+  type          : hf-github-releases
+  source        :
+    user        : "robertke"
+    repository  : "nginx"
+    access_token: {{oauth_token}}
+    drafts      : true
+
+jobs:
+- name: build-draft-and-release
+  public: false
+  serial: true
+  plan:
+  - get: app-pr
+    trigger: true
+
+  - aggregate:
+    - task: build php
+      file: app-pr/ci/tasks/build-php.yml
+      params:
+        PROJECT_SRC: app-pr
+
+  - task: create artifact
+    file: app-pr/ci/tasks/build-draft.yml
+
+  - put: semantic-draft-version
+    params:
+        pre: 'draft'
+
+  - put: gh-release-draft
+    params:
+      name: semantic-draft-version/version
+      tag : semantic-draft-version/version
+      body: artifacts/body
+      globs:
+      - artifacts/*.tar.gz
