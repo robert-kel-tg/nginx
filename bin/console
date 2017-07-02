@@ -11,8 +11,7 @@ $app = new Application('Test app console');
 $app->setCatchExceptions(true);
 
 
-//print_r(getenv('MANDRILL_APIKEY')); exit;
-$mandrill = new Mandrill('cZlKzaHNJC-oEeLsz0-BFw');
+$mandrill = new Mandrill(getenv('MANDRILL_APIKEY'));
 
 $app->add(new SendTestEmailCommand($mandrill));
 

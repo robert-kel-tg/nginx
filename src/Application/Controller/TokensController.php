@@ -69,8 +69,6 @@ final class TokensController
             'HS512'
         );
 
-//        echo '<pre>'; print_r($jwtToken); exit; echo '</pre>';
-
         $response->getBody()->write(
             $this->serializer->serialize([
                 'access_token' => $jwtToken,
