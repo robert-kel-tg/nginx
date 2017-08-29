@@ -10,6 +10,8 @@ use League\Route\RouteCollection;
 use JMS\Serializer\SerializerBuilder;
 
 use MyApp\Infrastructure\Persistence\InMemory\UserRepository;
+use MyApp\Application\Middleware\AuthenticationMiddleware;
+use MyApp\Application\Middleware\DigestAuthorizationService;
 
 $container = new Container;
 $container->share('response', Response::class);
@@ -24,6 +26,8 @@ $route = new RouteCollection($container);
 $serializer = SerializerBuilder::create()->build();
 
 $userRepo = new UserRepository();
+
+$authenticationMiddleware = [new AuthenticationMiddleware(new DigestAuthorizationService(), $serializer), 'authenticate'];
 
 require_once __DIR__ . '/../app/routes.php';
 
